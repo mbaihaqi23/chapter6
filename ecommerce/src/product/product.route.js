@@ -1,10 +1,10 @@
 const  express = require('express');
-const { getAllProducts } = require('./product.service');
-const  productRouter = express.Router();
+const productService = require('./product.service');
+const productRouter = express.Router();
 
 //API get all product
 productRouter.get('/products', async (req, res) =>{
-    const products = getAllProducts();
+    const products = await productService.getAllProducts;
     res.json(products);
 });
 

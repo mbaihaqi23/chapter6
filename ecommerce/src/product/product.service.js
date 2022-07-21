@@ -1,10 +1,11 @@
-//const productRouter = require("./product.route")
-const { repoGetAllProducts } = require('./product.repo');
+const productRepo = require('./product.repo');
 
 const getAllProducts = async() => {
-    return await repoGetAllProducts();
+    return await productRepo.getAllProducts();
 };
 
-module.exports = {
-    getAllProducts,
+const productService = {
+    getAllProducts
 };
+
+module.exports = productService;
