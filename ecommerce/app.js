@@ -1,12 +1,14 @@
-const express = require('express');
-
-const productRouter = require('./src/product/product.route');
+const express = require("express");
+const productRouter = require("./src/product/product.route");
 const app = express();
 const port = 3000;
 
-app.use(express.json());
+const bodyParser = require('body-parser'); 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     res.send('hi');
 });
 
