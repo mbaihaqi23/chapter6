@@ -1,12 +1,26 @@
 const express = require("express");
+const userGameRouter = require("./src/user/user.route");
 const app = express();
-const port = 8000;
+require("dotenv").config();
+const port =
+  process.env.NODE_ENV === "production"
+    ? process.env.PROD_PORT
+    : process.env.DEV_PORT;
+
+// !important!
+// you need to install the following libraries |express|[dotenv > if required]
+// or run this command >> npm i express dotenv
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.send('hi');
+  res.send("hello from simple server :)");
 });
 
+app.use(userGameRouter)
 
-app.listen(port, () => {
-    console.log(`App listening on port ${port}!`);
-});
+app.listen(port, () =>
+  console.log(
+    `> Server in ${process.env.NODE_ENV} mode, and running on port: ${port}`
+  )
+);
