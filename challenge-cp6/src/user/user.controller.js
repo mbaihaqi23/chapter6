@@ -6,38 +6,26 @@ const getAllUsers = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const { username } = req.params;
-    const user = await userService.getUser(username);
-    //console.log(req.params)
-    res.json(user)
-}
-
-
+    try {
+        const { username } = req.params;
+        const user = await userService.getUsername(username)
+        res.json(user)
+      } catch (error) {}
+    };
 
 
 const addUser = async (req, res) =>  {
-    // const userAttributes = {
-    //     username: req.body.username,
-    // }
-    // const isExist = await userService.getUser(userAttributes.username)
-    // if(!isExist) {
-    //     const newUser = await userService.addUser(userAttributes)
-    //     console.log(newUser.username)
-    //     res.json(newUser);  
-    // } else {
-    //     res.json('user is already exist')
-    // }
     try {
         const { username, password } = req.body;
-        const exist = await userService.getUser(username);
+        const exist = await userService.getUser(username)
         if (!exist) {
-          const newUser = await userService.addUser(username, password);
-          res.json(newUser);
+          const newUser = await userService.addUser(username, password)
+          res.json(newUser)
         } else {
           res.json("Data dengan username yang sama sudah ada");
         }
       } catch (error) {
-        res.json(error.message);
+        res.json(error.message)
       }
 }
 
@@ -52,7 +40,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     const { id } = req.params
-    const deleteUser = await userService.deleteUser(id)
+    const user = await userService.deleteUser(id)
     res.json({
         id: id,
         status: "deleted"
