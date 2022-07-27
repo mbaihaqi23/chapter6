@@ -15,18 +15,23 @@ const getUser = async (req, res) => {
 
 
 const addUser = async (req, res) =>  {
-    try {
-        const { username, password } = req.body;
-        const exist = await userService.getUser(username)
-        if (!exist) {
-          const newUser = await userService.addUser(username, password)
-          res.json(newUser)
-        } else {
-          res.json("Data dengan username yang sama sudah ada");
-        }
-      } catch (error) {
-        res.json(error.message)
-      }
+    console.log(req.body);
+    const { username, password } = req.body;
+    const newUser = await userService.addUser(username, password)
+
+    // try {
+    //     const { username, password } = req.body;
+    //     const exist = await userService.getUser(username)
+    //     if (!exist) {
+    //       const newUser = await userService.addUser(username, password)
+    //       res.json(newUser)
+    //     } else {
+    //       res.json("Data dengan username yang sama sudah ada");
+    //     }
+    //   } catch (error) {
+    //     res.json(error.message)
+    //   }
+    res.json(newUser)
 }
 
 
