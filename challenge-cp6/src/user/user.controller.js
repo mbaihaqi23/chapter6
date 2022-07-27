@@ -6,26 +6,41 @@ const getAllUsers = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const {q} = req.query
-    const user = await userService.getUser(q)
-    console.log(req.query.q)
+    const { username } = req.params;
+    const user = await userService.getUser(username);
+    //console.log(req.params)
     res.json(user)
 }
 
+
+
+
 const addUser = async (req, res) =>  {
-    const userAttributes = {
-        username: req.body.username,
-        password: req.body.password,
-    }
-    const isExist = await userService.getUser(userAttributes.username)
-    if(!isExist) {
-        const newUser = await userService.addUser(userAttributes)
-        console.log(newUser.username)
-        res.json(newUser)
-    } else {
-        res.json('user is already exist')
-    }
+    // const userAttributes = {
+    //     username: req.body.username,
+    // }
+    // const isExist = await userService.getUser(userAttributes.username)
+    // if(!isExist) {
+    //     const newUser = await userService.addUser(userAttributes)
+    //     console.log(newUser.username)
+    //     res.json(newUser);  
+    // } else {
+    //     res.json('user is already exist')
+    // }
+    try {
+        const { username, password } = req.body;
+        const exist = await userService.getUser(username);
+        if (!exist) {
+          const newUser = await userService.addUser(username, password);
+          res.json(newUser);
+        } else {
+          res.json("Data dengan username yang sama sudah ada");
+        }
+      } catch (error) {
+        res.json(error.message);
+      }
 }
+
 
 const updateUser = async (req, res) => {
     const { id } = req.params

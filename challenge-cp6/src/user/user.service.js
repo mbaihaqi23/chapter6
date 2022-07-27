@@ -1,18 +1,18 @@
 const userRepo = require("./user.repo")
 
 //get all users
-const getAllUsers = async () => {
-    return await userRepo.getAllUsers()
+const getAllUsers = async (username, password) => {
+    return await userRepo.getAllUsers(username, password)
 }
 
 //get one user
-const getUser = async (q) => {
-    return await userRepo.getUser(q)
+const getUser = async () => {
+    return await userRepo.getUser()
 }
 
 //add new user
-const addUser = async (p) => {
-    return await userRepo.addUser(p)
+const addUser = async (username, password) => {
+    return await userRepo.addUser(username, password)
 }
 
 //edit one user

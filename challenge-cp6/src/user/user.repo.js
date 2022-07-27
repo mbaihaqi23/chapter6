@@ -6,28 +6,28 @@ const getAllUsers = async () => {
 }
 
 //get one user
-const getUser = async (q) => {
-    return await user_game.findAll({
+const getUser = async (username) => {
+    return await user_game.findOne({
         where: {
-            username: q
+            username: username,
         }
     })
 }
 
 //add new user
-const addUser = async (p) => {
+const addUser = async (username,password) => {
     return await user_game.create({
-        username: p.username,
-        password: p.password
-    })
-}
+      username : username,
+      password : password,
+    });
+  };
 
 //edit one user
 const updateUser = async ({id, username, password}) => {
     return await user_game.update(
     {
-        username,
-        password,
+        username : username,
+        password : username,
     },
     {
         where: {
